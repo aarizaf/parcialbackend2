@@ -4,7 +4,7 @@ import { ApiProperty } from '@nestjs/swagger';
  * DTO de respuesta para un autor
  */
 export class AuthorResponseDto {
-  @ApiProperty({ example: 'dd560bf6-542d-4905-aea3-05b89f78f552' })
+  @ApiProperty({ example: '123455' })
   id: string;
 
   @ApiProperty({ example: 'Gabriel García Márquez' })

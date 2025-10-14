@@ -1,11 +1,6 @@
-# docker-compose.yml - Orquesta los servicios de la aplicación
-
-version: '3.8'
-
 services:
-  # Servicio de base de datos PostgreSQL
   db:
-    image: postgres:15-alpine
+    image: postgres:16-alpine
     container_name: libraryapp-db
     environment:
       POSTGRES_USER: postgres
@@ -14,42 +9,37 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      # Persiste los datos en un volumen para no perderlos
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
+      interval: 5s
       timeout: 5s
       retries: 5
 
-  # Servicio de la aplicación NestJS
-  app:
+  api:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: libraryapp-api
-    environment:
-      # URL de conexión a la base de datos
-      # 'db' es el nombre del servicio de postgres
-      DATABASE_URL: "postgresql://postgres:postgres@db:5432/libraryapp?schema=public"
-      PORT: 3000
     ports:
       - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/libraryapp?schema=public
+      PORT: 3000
+      NODE_ENV: production
     depends_on:
       db:
         condition: service_healthy
-    volumes:
-      # Monta el código para desarrollo (opcional)
-      - ./src:/app/src
     command: >
       sh -c "
-        echo '⏳ Esperando a que la base de datos esté lista...' &&
+        echo '⏳ Generando cliente de Prisma...' &&
+        npx prisma generate &&
+        echo '⏳ Aplicando migraciones...' &&
         npx prisma migrate deploy &&
-        echo '✅ Migraciones aplicadas' &&
+        echo '✅ Migraciones aplicadas exitosamente' &&
+        echo '🚀 Iniciando aplicación...' &&
         node dist/main.js
       "
-    restart: unless-stopped
 
 volumes:
-  # Volumen para persistir datos de PostgreSQL
   postgres_data:

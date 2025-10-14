@@ -14,14 +14,14 @@ import { DatabaseModule } from './database.module';
   imports: [DatabaseModule],
   controllers: [BooksController],
   providers: [
-    // Use Cases
+    // Casos de uso
     CreateBookUseCase,
     GetBookUseCase,
     ListBooksUseCase,
     UpdateBookUseCase,
     DeleteBookUseCase,
     GetBookAuthorUseCase,
-    // Repositories con tokens
+   
     {
       provide: 'BOOK_REPOSITORY',
       useClass: PrismaBookRepository,

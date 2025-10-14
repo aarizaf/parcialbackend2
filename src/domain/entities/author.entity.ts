@@ -15,9 +15,7 @@ export class AuthorEntity {
     this.validate();
   }
 
-  /**
-   * Valida las reglas de negocio del autor
-   */
+
   private validate(): void {
     if (!this.name || this.name.trim().length === 0) {
       throw new Error('El nombre del autor es requerido');
@@ -50,9 +48,7 @@ export class AuthorEntity {
     this.updatedAt = new Date();
   }
 
-  /**
-   * Obtiene el nombre normalizado (sin espacios extra, lowercase)
-   */
+  
   getNormalizedName(): string {
     return this.name.trim().toLowerCase();
   }
