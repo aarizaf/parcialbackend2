@@ -1,0 +1,45 @@
+// Prisma Schema - Define la estructura de la base de datos
+
+// Configuración del generador de Prisma Client
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Configuración de la conexión a la base de datos
+// La URL viene de la variable de entorno DATABASE_URL
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modelo Category - Representa la tabla de categorías
+model Category {
+  id        String   @id @default(uuid())
+  name      String   @unique // Nombre único para evitar duplicados
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relación: una categoría puede tener muchas tareas
+  tasks     Task[]
+
+  @@map("categories") // Nombre de la tabla en la base de datos
+}
+
+// Modelo Task - Representa la tabla de tareas
+model Task {
+  id         String   @id @default(uuid())
+  title      String
+  completed  Boolean  @default(false)
+  categoryId String   @map("category_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  // Relación: cada tarea pertenece a una categoría
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  // Índice para mejorar búsquedas por categoría
+  @@index([categoryId])
+  // Índice compuesto para evitar duplicados: mismo título en la misma categoría
+  @@unique([title, categoryId])
+  @@map("tasks") // Nombre de la tabla en la base de datos
+}
