@@ -1,4 +1,5 @@
-// Prisma Schema - Define la estructura de la base de datos
+// Prisma Schema - LibraryApp
+// Define la estructura de la base de datos para gestión de libros y autores
 
 // Configuración del generador de Prisma Client
 generator client {
@@ -12,34 +13,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Modelo Category - Representa la tabla de categorías
-model Category {
+// Modelo Author - Representa la tabla de autores
+model Author {
   id        String   @id @default(uuid())
   name      String   @unique // Nombre único para evitar duplicados
+  birthYear Int      @map("birth_year")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  // Relación: una categoría puede tener muchas tareas
-  tasks     Task[]
+  // Relación: un autor puede tener muchos libros
+  books     Book[]
 
-  @@map("categories") // Nombre de la tabla en la base de datos
+  @@map("authors") // Nombre de la tabla en la base de datos
 }
 
-// Modelo Task - Representa la tabla de tareas
-model Task {
-  id         String   @id @default(uuid())
-  title      String
-  completed  Boolean  @default(false)
-  categoryId String   @map("category_id")
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @updatedAt @map("updated_at")
+// Modelo Book - Representa la tabla de libros
+model Book {
+  id        String   @id @default(uuid())
+  title     String
+  year      Int
+  authorId  String   @map("author_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  // Relación: cada tarea pertenece a una categoría
-  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  // Relación: cada libro pertenece a un autor
+  author    Author   @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
-  // Índice para mejorar búsquedas por categoría
-  @@index([categoryId])
-  // Índice compuesto para evitar duplicados: mismo título en la misma categoría
-  @@unique([title, categoryId])
-  @@map("tasks") // Nombre de la tabla en la base de datos
+  // Índice para mejorar búsquedas por autor
+  @@index([authorId])
+  // Índice compuesto para evitar duplicados: mismo título del mismo autor
+  @@unique([title, authorId])
+  @@map("books") // Nombre de la tabla en la base de datos
 }

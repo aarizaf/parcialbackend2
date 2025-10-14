@@ -6,11 +6,11 @@ services:
   # Servicio de base de datos PostgreSQL
   db:
     image: postgres:15-alpine
-    container_name: tasksapp-db
+    container_name: libraryapp-db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: tasksapp
+      POSTGRES_DB: libraryapp
     ports:
       - "5432:5432"
     volumes:
@@ -27,11 +27,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: tasksapp-api
+    container_name: libraryapp-api
     environment:
       # URL de conexión a la base de datos
       # 'db' es el nombre del servicio de postgres
-      DATABASE_URL: "postgresql://postgres:postgres@db:5432/tasksapp?schema=public"
+      DATABASE_URL: "postgresql://postgres:postgres@db:5432/libraryapp?schema=public"
       PORT: 3000
     ports:
       - "3000:3000"

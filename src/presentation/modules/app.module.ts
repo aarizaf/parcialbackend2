@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { TasksModule } from './tasks.module';
-import { CategoriesModule } from './categories.module';
+import { AuthorsModule } from './authors.module';
+import { BooksModule } from './books.module';
 import { DatabaseModule } from './database.module';
+import { HealthController } from '../controllers/health.controller';
 
 /**
- * AppModule - Módulo raíz de la aplicación
+ * AppModule - Módulo raíz de la aplicación LibraryApp
  * 
  * Importa todos los módulos de la aplicación
  * Este es el punto de entrada de NestJS
@@ -12,8 +13,9 @@ import { DatabaseModule } from './database.module';
 @Module({
   imports: [
     DatabaseModule,
-    CategoriesModule,
-    TasksModule,
+    AuthorsModule,
+    BooksModule,
   ],
+  controllers: [HealthController],
 })
 export class AppModule {}

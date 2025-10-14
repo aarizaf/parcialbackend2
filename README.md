@@ -1,55 +1,107 @@
-# TasksApp - Clean Architecture con NestJS
+# LibraryApp - Clean Architecture con NestJS# TasksApp - Clean Architecture con NestJS
 
-API REST para gestión de tareas y categorías implementada con **Clean Architecture** en NestJS, dockerizada con Docker Compose y documentada con Swagger.
 
-## 🏗️ Arquitectura
 
-Este proyecto sigue los principios de **Clean Architecture** con la siguiente estructura de capas:
+API REST para gestión de libros y autores implementada con **Clean Architecture** en NestJS, dockerizada con Docker Compose y documentada con Swagger.API REST para gestión de tareas y categorías implementada con **Clean Architecture** en NestJS, dockerizada con Docker Compose y documentada con Swagger.
 
-```
+
+
+## 📋 Parcial Backend 2 - Especificaciones## 🏗️ Arquitectura
+
+
+
+Este proyecto cumple con todos los requerimientos del segundo parcial de Desarrollo de Aplicaciones Web Backend.Este proyecto sigue los principios de **Clean Architecture** con la siguiente estructura de capas:
+
+
+
+### ✅ Requerimientos Implementados```
+
 src/
-├── domain/              # Capa de Dominio (reglas de negocio puras)
-│   ├── entities/        # Entidades de negocio (Task, Category)
-│   └── repositories/    # Interfaces de repositorios (contratos)
+
+1. **Estructura del proyecto (0.2 p)** ✅├── domain/              # Capa de Dominio (reglas de negocio puras)
+
+   - Clean Architecture: domain, application, infrastructure, presentation│   ├── entities/        # Entidades de negocio (Task, Category)
+
+   - Módulos separados para Books y Authors│   └── repositories/    # Interfaces de repositorios (contratos)
+
 │
-├── application/         # Capa de Aplicación (casos de uso)
-│   ├── use-cases/       # Casos de uso (lógica de aplicación)
+
+2. **Servicio de Autores (1 p)** ✅├── application/         # Capa de Aplicación (casos de uso)
+
+   - CRUD completo + validación de duplicados│   ├── use-cases/       # Casos de uso (lógica de aplicación)
+
 │   └── dtos/            # DTOs para transferencia de datos
-│
-├── infrastructure/      # Capa de Infraestructura (detalles técnicos)
+
+3. **Servicio de Libros (1 p)** ✅│
+
+   - CRUD completo + validación de authorId├── infrastructure/      # Capa de Infraestructura (detalles técnicos)
+
 │   ├── persistence/     # Configuración de Prisma
-│   └── repositories/    # Implementaciones concretas con Prisma
-│
-└── presentation/        # Capa de Presentación (interfaz HTTP)
+
+4. **Integración entre servicios (1.5 p)** ✅│   └── repositories/    # Implementaciones concretas con Prisma
+
+   - GET /books/:id/author│
+
+   - GET /authors/:id/books└── presentation/        # Capa de Presentación (interfaz HTTP)
+
     ├── controllers/     # Controladores REST
-    └── modules/         # Módulos de NestJS
-```
+
+5. **Docker Compose y Swagger (1 p)** ✅    └── modules/         # Módulos de NestJS
+
+   - docker-compose.yml funcional```
+
+   - Swagger en /api
 
 ## �️ Stack Tecnológico
 
-- **NestJS 11** - Framework backend progresivo para Node.js
+6. **Pruebas y verificación (0.3 p)** ✅
+
+   - GET /health retorna {"status": "ok"}- **NestJS 11** - Framework backend progresivo para Node.js
+
 - **TypeScript 5** - Superset tipado de JavaScript
-- **Prisma 6** - ORM moderno para Node.js y TypeScript
+
+## 🚀 Ejecución- **Prisma 6** - ORM moderno para Node.js y TypeScript
+
 - **PostgreSQL 15** - Base de datos relacional
-- **Swagger/OpenAPI** - Documentación interactiva de API
-- **Docker & Docker Compose** - Contenedorización y orquestación
-- **class-validator** - Validación de DTOs basada en decoradores
 
-## �🚀 Ejecución con Docker
+```bash- **Swagger/OpenAPI** - Documentación interactiva de API
 
-### Prerrequisitos
+docker compose up --build- **Docker & Docker Compose** - Contenedorización y orquestación
+
+```- **class-validator** - Validación de DTOs basada en decoradores
+
+
+
+- API: http://localhost:3000## �🚀 Ejecución con Docker
+
+- Swagger: http://localhost:3000/api
+
+- Health: http://localhost:3000/health### Prerrequisitos
+
 - Docker
-- Docker Compose
 
-### Pasos
+## 📚 Endpoints- Docker Compose
 
-1. **Clonar el repositorio**
+
+
+### Authors### Pasos
+
+- POST /authors, GET /authors, GET /authors/:id, PUT /authors/:id, DELETE /authors/:id
+
+- GET /authors/:id/books ⭐1. **Clonar el repositorio**
+
    ```bash
-   git clone <tu-repo-url>
-   cd parcialbackend2
-   ```
 
-2. **Configurar variables de entorno**
+### Books   git clone <tu-repo-url>
+
+- POST /books, GET /books, GET /books/:id, PUT /books/:id, DELETE /books/:id   cd parcialbackend2
+
+- GET /books/:id/author ⭐   ```
+
+
+
+Ver documentación completa en Swagger: http://localhost:3000/api2. **Configurar variables de entorno**
+
    ```bash
    cp .env.example .env
    ```

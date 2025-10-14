@@ -31,20 +31,21 @@ async function bootstrap() {
 
   // Configurar Swagger (OpenAPI)
   const config = new DocumentBuilder()
-    .setTitle('TasksApp API')
+    .setTitle('LibraryApp API')
     .setDescription(
-      'API REST para gestión de tareas y categorías con Clean Architecture',
+      'API REST para gestión de libros y autores con Clean Architecture',
     )
     .setVersion('1.0')
-    .addTag('Tasks', 'Endpoints para gestión de tareas')
-    .addTag('Categories', 'Endpoints para gestión de categorías')
+    .addTag('Health', 'Health check')
+    .addTag('Authors', 'Endpoints para gestión de autores')
+    .addTag('Books', 'Endpoints para gestión de libros')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
   
   // Exponer Swagger en /api
   SwaggerModule.setup('api', app, document, {
-    customSiteTitle: 'TasksApp API Docs',
+    customSiteTitle: 'LibraryApp API Docs',
     customfavIcon: 'https://nestjs.com/img/logo-small.svg',
     customCss: '.swagger-ui .topbar { display: none }',
   });

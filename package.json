@@ -1,7 +1,7 @@
 {
-  "name": "parcialbackend2",
+  "name": "libraryapp",
   "version": "1.0.0",
-  "description": "Practica Parcial #2 Backend",
+  "description": "API REST para gestión de libros y autores con Clean Architecture - Parcial Backend",
   "main": "dist/main.js",
   "scripts": {
     "build": "tsc",
