@@ -13,7 +13,7 @@ export interface IAuthorRepository {
 
   /**
    * Busca un autor por su nombre exacto
-   * @returns AuthorEntity si existe, null si no existe
+   * @returns 
    */
   findByName(name: string): Promise<AuthorEntity | null>;
 

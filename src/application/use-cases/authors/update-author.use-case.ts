@@ -11,13 +11,12 @@ export class UpdateAuthorUseCase {
   ) {}
 
   async execute(id: string, dto: UpdateAuthorDto): Promise<AuthorEntity> {
-    // Verificar que el autor existe
+    
     const author = await this.authorRepository.findById(id);
     if (!author) {
       throw new NotFoundException(`No se encontró un autor con el ID "${id}"`);
     }
 
-    // Si se está actualizando el nombre, verificar que no esté duplicado
     if (dto.name && dto.name !== author.name) {
       const exists = await this.authorRepository.existsByName(dto.name);
       if (exists) {
@@ -25,7 +24,6 @@ export class UpdateAuthorUseCase {
       }
     }
 
-    // Actualizar los campos
     if (dto.name) {
       author.updateName(dto.name);
     }
@@ -33,7 +31,6 @@ export class UpdateAuthorUseCase {
       author.updateBirthYear(dto.birthYear);
     }
 
-    // Persistir cambios
     return await this.authorRepository.update(id, author);
   }
 }

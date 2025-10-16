@@ -53,12 +53,9 @@ export class AuthorEntity {
     return this.name.trim().toLowerCase();
   }
 
-  /**
-   * Factory method para crear un nuevo autor
-   */
+  
   static create(name: string, birthYear: number): AuthorEntity {
     const now = new Date();
-    // UUID será generado por la base de datos
     return new AuthorEntity('', name.trim(), birthYear, now, now);
   }
 }

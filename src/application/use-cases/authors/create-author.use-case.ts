@@ -11,16 +11,13 @@ export class CreateAuthorUseCase {
   ) {}
 
   async execute(dto: CreateAuthorDto): Promise<AuthorEntity> {
-    // Validar que no exista un autor con el mismo nombre
     const exists = await this.authorRepository.existsByName(dto.name);
     if (exists) {
       throw new ConflictException(`Ya existe un autor con el nombre "${dto.name}"`);
     }
 
-    // Crear la entidad de dominio
     const author = AuthorEntity.create(dto.name, dto.birthYear);
 
-    // Persistir en el repositorio
     return await this.authorRepository.create(author);
   }
 }

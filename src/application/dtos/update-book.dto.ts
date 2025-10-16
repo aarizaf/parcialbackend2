@@ -1,13 +1,11 @@
 import { IsString, IsOptional, IsInt, Min, Max } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-/**
- * DTO para actualizar un libro existente
- */
+
 export class UpdateBookDto {
   @ApiProperty({
     description: 'Título del libro',
-    example: 'Cien años de soledad',
+    example: 'Texto de ejemplo',
     required: false,
   })
   @IsString({ message: 'El título debe ser un texto' })

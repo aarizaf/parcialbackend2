@@ -1,21 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-/**
- * DTO de respuesta para un autor
- */
+
 export class AuthorResponseDto {
-  @ApiProperty({ example: '123455' })
+  @ApiProperty({ example: '1234567' })
   id: string;
 
-  @ApiProperty({ example: 'Gabriel García Márquez' })
+  @ApiProperty({ example: 'Andres Pérez' })
   name: string;
 
-  @ApiProperty({ example: 1927 })
+  @ApiProperty({ example: 2004 })
   birthYear: number;
 
-  @ApiProperty({ example: '2025-10-14T01:04:12.817Z' })
+  @ApiProperty({ example: '2025-10-16' })
   createdAt: Date;
 
-  @ApiProperty({ example: '2025-10-14T01:04:12.817Z' })
+  @ApiProperty({ example: '2025-10-16' })
   updatedAt: Date;
 }

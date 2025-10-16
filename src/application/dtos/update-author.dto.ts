@@ -1,13 +1,11 @@
 import { IsString, IsOptional, IsInt, Min, Max } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-/**
- * DTO para actualizar un autor existente
- */
+
 export class UpdateAuthorDto {
   @ApiProperty({
     description: 'Nombre del autor',
-    example: 'Gabriel García Márquez',
+    example: 'Andres Pérez',
     required: false,
   })
   @IsString({ message: 'El nombre debe ser un texto' })

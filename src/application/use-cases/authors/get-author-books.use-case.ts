@@ -12,13 +12,11 @@ export class GetAuthorBooksUseCase {
   ) {}
 
   async execute(authorId: string) {
-    // Verificar que el autor existe usando la abstracción
     const author = await this.authorRepository.findById(authorId);
     if (!author) {
       throw new NotFoundException(`No se encontró un autor con el ID "${authorId}"`);
     }
 
-    // Obtener los libros del autor
     const books = await this.bookRepository.findByAuthorId(authorId);
 
     return {

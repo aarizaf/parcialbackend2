@@ -1,13 +1,11 @@
 import { IsString, IsNotEmpty, IsInt, Min, Max, IsUUID } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-/**
- * DTO para crear un nuevo libro
- */
+
 export class CreateBookDto {
   @ApiProperty({
     description: 'Título del libro',
-    example: 'Cien años de soledad',
+    example: 'Texto de ejemplo',
     minLength: 1,
   })
   @IsString({ message: 'El título debe ser un texto' })
@@ -16,7 +14,7 @@ export class CreateBookDto {
 
   @ApiProperty({
     description: 'Año de publicación del libro',
-    example: 1967,
+    example: 2025,
     minimum: 1000,
   })
   @IsInt({ message: 'El año debe ser un número entero' })
