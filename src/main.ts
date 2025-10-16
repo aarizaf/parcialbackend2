@@ -46,10 +46,10 @@ async function bootstrap() {
   await app.listen(port);
 
   console.log(`
-  🚀 Aplicación iniciada exitosamente!
-  📝 Servidor corriendo en: http://localhost:${port}
-  📚 Documentación Swagger: http://localhost:${port}/api
-  🗄️  Base de datos: PostgreSQL
+  Aplicación iniciada exitosamente!
+  Servidor corriendo en: http://localhost:${port}
+  Documentación Swagger: http://localhost:${port}/api
+  
   `);
 }
 
